@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مكافآت ترحيبية حتى 500%</title>
+  <style>
+    :root {
+      --bg: #0f1016;
+      --card: rgba(255,255,255,.09);
+      --card-2: rgba(255,255,255,.13);
+      --border: rgba(255,255,255,.16);
+      --text: #ffffff;
+      --muted: #c5cad8;
+      --purple: #bd00ff;
+      --violet: #7b2cff;
+      --blue: #1393ff;
+      --cyan: #22ddff;
+      --gold: #ffd76a;
+      --green: #42e598;
+      --orange: #ff5a1f;
+      --shadow: 0 24px 65px rgba(0,0,0,.45);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 5%, rgba(189,0,255,.34), transparent 34%),
+        radial-gradient(circle at 92% 18%, rgba(19,147,255,.28), transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(123,44,255,.22), transparent 38%),
+        var(--bg);
+      overflow-x: hidden;
+      padding-bottom: 95px;
+    }
+
+    a { color: inherit; }
+
+    /* يمنع العناصر الزخرفية من تغطية الأزرار على الهاتف */
+    .blob,
+    .hero-card::before,
+    .hero-gift,
+    .card-gift,
+    .fomo-card::after,
+    .bonus-card::before,
+    .contact-panel::after {
+      pointer-events: none;
+    }
+
+    .blob {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: .42;
+      z-index: -1;
+      animation: floatBlob 10s ease-in-out infinite alternate;
+    }
+
+    .blob.one { background: var(--purple); top: 80px; right: -120px; }
+    .blob.two { background: var(--blue); bottom: 130px; left: -120px; animation-delay: 1.4s; }
+
+    @keyframes floatBlob {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(-25px, 35px,0) scale(1.15); }
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 30px));
+      margin: 0 auto;
+      padding: 22px 0 42px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .logo {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      box-shadow: 0 0 32px rgba(189,0,255,.38);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 0 20px;
+      border-radius: 17px;
+      font-weight: 900;
+      transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-primary {
+      color: #121212;
+      background: #fff;
+      box-shadow: 0 18px 40px rgba(255,255,255,.18);
+    }
+
+    .btn-telegram {
+      color: #fff;
+      background: linear-gradient(135deg, #24a8ff, #006fff);
+      box-shadow: 0 16px 38px rgba(19,147,255,.30);
+    }
+
+    .btn-dark {
+      color: #fff;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+      border-radius: 36px;
+      padding: 34px;
+      background:
+        linear-gradient(135deg, rgba(189,0,255,.95), rgba(123,44,255,.90) 48%, rgba(19,147,255,.86)),
+        #171922;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      top: -210px;
+      left: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.42), transparent 60%);
+      animation: shine 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes shine {
+      0%, 100% { transform: translate(0,0) rotate(0); opacity: .28; }
+      50% { transform: translate(95px, 70px) rotate(20deg); opacity: .46; }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.17);
+      border: 1px solid rgba(255,255,255,.18);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6.4vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -1.7px;
+      margin-bottom: 16px;
+    }
+
+    .hero-text {
+      max-width: 650px;
+      color: rgba(255,255,255,.88);
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .promo-strip {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      width: fit-content;
+      max-width: 100%;
+      padding: 12px;
+      border-radius: 20px;
+      background: rgba(0,0,0,.23);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(14px);
+      margin-bottom: 18px;
+    }
+
+    .promo-code {
+      direction: ltr;
+      display: inline-grid;
+      place-items: center;
+      min-width: 145px;
+      padding: 10px 16px;
+      border-radius: 16px;
+      color: #111;
+      font-size: 28px;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--gold), #fff4b5, var(--green), var(--cyan));
+      background-size: 320% 320%;
+      box-shadow: 0 0 24px rgba(255,215,106,.52), 0 0 46px rgba(66,229,152,.30);
+      animation: codeGradient 2s ease-in-out infinite, codePulse 1.25s ease-in-out infinite;
+    }
+
+    @keyframes codeGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes codePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-gift {
+      position: absolute;
+      left: 18px;
+      bottom: 12px;
+      font-size: 135px;
+      filter: drop-shadow(0 30px 25px rgba(0,0,0,.25));
+      animation: giftFloat 3.8s ease-in-out infinite;
+      opacity: .94;
+      z-index: 1;
+    }
+
+    @keyframes giftFloat {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-17px) rotate(3deg); }
+    }
+
+    .fomo-card {
+      border-radius: 34px;
+      padding: 26px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .fomo-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,106,.24), transparent 65%);
+      left: -80px;
+      top: -70px;
+    }
+
+    .fomo-card h2 {
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .fomo-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      direction: ltr;
+      margin: 20px 0;
+    }
+
+    .time-box {
+      min-height: 82px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .time-box strong {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .time-box span {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      direction: rtl;
+    }
+
+    .section-title {
+      font-size: 29px;
+      margin: 34px 0 18px;
+      letter-spacing: -.6px;
+    }
+
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .bonus-card {
+      position: relative;
+      min-height: 250px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      transition: transform .24s ease, filter .24s ease;
+      isolation: isolate;
+    }
+
+    .bonus-card:hover { transform: translateY(-7px) scale(1.01); filter: saturate(1.08); }
+
+    .bonus-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.34), transparent 62%);
+      top: -88px;
+      left: -65px;
+      z-index: -1;
+    }
+
+    .purple { background: linear-gradient(135deg, #d833ff, #af00ff 55%, #7a18ff); }
+    .orange { background: linear-gradient(135deg, #ffb16b, #ff6537 50%, #ff3d00); }
+    .violet { background: linear-gradient(135deg, #914cff, #8324ff 48%, #b000ff); }
+    .blue { background: linear-gradient(135deg, #68c2ff, #1994ff 55%, #0077ff); }
+
+    .card-gift {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 74px;
+      filter: drop-shadow(0 18px 20px rgba(0,0,0,.26));
+      animation: smallGift 4s ease-in-out infinite;
+    }
+
+    @keyframes smallGift {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(8px) rotate(-6deg); }
+    }
+
+    .bonus-card h3 {
+      margin-top: 78px;
+      font-size: 27px;
+      letter-spacing: -.8px;
+    }
+
+    .bonus-card p {
+      margin: 9px 0 16px;
+      color: rgba(255,255,255,.78);
+      font-weight: 800;
+    }
+
+    .mini-timer {
+      display: inline-flex;
+      direction: ltr;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .card-btn {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      cursor: pointer;
+      border-radius: 15px;
+      color: #111;
+      background: rgba(255,255,255,.96);
+      font-weight: 900;
+    }
+
+    .guide {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 20px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 24px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 55px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+
+    .guide-image-box {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.25);
+      min-height: 360px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.38);
+    }
+
+    .guide-image-box img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .image-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 22px;
+      color: var(--muted);
+      background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.12), transparent 45%), rgba(0,0,0,.18);
+      z-index: -1;
+    }
+
+    .guide-content h2 {
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .guide-content p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 18px;
+    }
+
+    .copy-box {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 13px;
+      border-radius: 22px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.14);
+      margin-bottom: 16px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 11px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      font-weight: 1000;
+      box-shadow: 0 0 24px rgba(19,147,255,.35);
+    }
+
+    .step b { display: block; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin-top: 22px;
+      padding: 24px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(189,0,255,.78), rgba(19,147,255,.76));
+      border: 1px solid rgba(255,255,255,.17);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .contact-panel::after {
+      content: "📣";
+      position: absolute;
+      left: 25px;
+      top: -12px;
+      font-size: 95px;
+      opacity: .35;
+      transform: rotate(-12deg);
+    }
+
+    .contact-panel h2 { font-size: clamp(27px, 4vw, 44px); margin-bottom: 8px; }
+    .contact-panel p { color: rgba(255,255,255,.82); line-height: 1.75; }
+
+    .contact-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 2;
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    details {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px 20px;
+    }
+
+    summary { cursor: pointer; font-weight: 900; }
+    details p { color: var(--muted); line-height: 1.8; padding-top: 12px; }
+
+    .mobile-sticky {
+      position: fixed;
+      right: 12px;
+      left: 12px;
+      bottom: 12px;
+      z-index: 20;
+      display: none;
+      gap: 9px;
+      padding: 10px;
+      border-radius: 23px;
+      background: rgba(15,16,22,.82);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.48);
+    }
+
+    .mobile-sticky a {
+      flex: 1;
+      min-height: 48px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+    }
+
+    .mobile-sticky a:first-child { background: #fff; color: #111; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: reveal .72s ease forwards;
+    }
+
+    .delay-1 { animation-delay: .12s; }
+    .delay-2 { animation-delay: .24s; }
+    .delay-3 { animation-delay: .36s; }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 980px) {
+      .hero, .guide, .contact-panel { grid-template-columns: 1fr; }
+      .bonus-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-actions { justify-content: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .page { width: min(100% - 24px, 1180px); padding-top: 16px; }
+      .top-actions { display: none; }
+      .hero-card { min-height: 585px; padding: 24px; border-radius: 29px; }
+      h1 { font-size: 39px; letter-spacing: -1px; }
+      .hero-text { font-size: 15.5px; }
+      .promo-strip { width: 100%; justify-content: space-between; }
+      .promo-code { min-width: 132px; font-size: 25px; }
+      .hero-actions .btn { width: 100%; }
+      .hero-gift { font-size: 108px; left: 12px; bottom: 8px; }
+      .countdown { gap: 7px; }
+      .time-box { min-height: 72px; border-radius: 17px; }
+      .time-box strong { font-size: 23px; }
+      .bonus-grid { grid-template-columns: 1fr; }
+      .guide { padding: 16px; border-radius: 28px; }
+      .guide-image-box, .guide-image-box img { min-height: 330px; }
+      .copy-box .btn { width: 100%; }
+      .contact-panel { padding: 22px; }
+      .contact-actions .btn { width: 100%; }
+      .mobile-sticky { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+
+  <main class="page">
+    <header class="topbar reveal">
+      <div class="brand">
+        <div class="logo">🎁</div>
+        <span>Bonus Zone</span>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-dark" href="https://www.facebook.com/profile.php?id=61577421413959" target="_blank" rel="noopener">تواصل معنا</a>
+        <a class="btn btn-telegram" href="https://t.me/Play_2_Win_official" target="_blank" rel="noopener">اشترك في التيلغرام</a>
+        <a class="btn btn-primary" href="https://lkvn.cc/8668ca">سجّل الآن</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card reveal delay-1">
+        <div class="badge">⚡ عرض محدود للمستخدمين الجدد</div>
+        <h1>سجّل الآن واحصل على مكافآت حتى 500%</h1>
+        <p class="hero-text">استعمل كود العرض أثناء التسجيل باش تستفيد من المكافأة. الكود ظاهر هنا بشكل واضح ومتحرك حتى لا ينساه الزائر.</p>
+
+        <div class="promo-strip">
+          <span>كود العرض:</span>
+          <strong class="promo-code">5000TN</strong>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://lkvn.cc/8668ca">سجّل الآن بالكود</a>
+          <a class="btn btn-telegram" href="https://t.me/Play_2_Win_official" target="_blank" rel="noopener">اشترك في قناة التيلغرام</a>
+          <a class="btn btn-dark" href="#guide">أين أكتب الكود؟</a>
+        </div>
+
+        <div class="hero-gift">🎁</div>
+      </div>
+
+      <aside class="fomo-card reveal delay-2">
+        <span class="badge">⏳ الوقت المتبقي</span>
+        <h2>لا تضيع العرض</h2>
+
+        <div class="countdown" id="mainCountdown">
+          <div class="time-box"><strong id="days">00</strong><span>يوم</span></div>
+          <div class="time-box"><strong id="hours">07</strong><span>ساعة</span></div>
+          <div class="time-box"><strong id="minutes">19</strong><span>دقيقة</span></div>
+          <div class="time-box"><strong id="seconds">05</strong><span>ثانية</span></div>
+        </div>
+
+        <div class="promo-strip">
+          <span>الكود:</span>
+          <strong class="promo-code">5000TN</strong>
+        </div>
+
+        <a class="btn btn-primary" href="https://lkvn.cc/8668ca">ابدأ التسجيل الآن</a>
+      </aside>
+    </section>
+
+    <h2 class="section-title">العروض المتاحة</h2>
+    <section class="bonus-grid">
+      <article class="bonus-card purple reveal">
+        <div class="card-gift">🎁</div>
+        <h3>100% + 70 نقطة</h3>
+        <p>مكافأة المستخدم الجديد</p>
+        <div class="mini-timer timer" data-seconds="26345">07 : 19 : 05</div>
+        <button class="card-btn">احصل على العرض</button>
+      </article>
+
+      <article class="bonus-card orange reveal delay-1">
+        <div class="card-gift">🎁</div>
+        <h3>120% + 100 نقطة</h3>
+        <p>عرض خاص</p>
+        <div class="mini-timer timer" data-seconds="26345">07 : 19 : 05</div>
+        <button class="card-btn">احصل على العرض</button>
+      </article>
+
+      <article class="bonus-card violet reveal delay-2">
+        <div class="card-gift">🎁</div>
+        <h3>130% + 150 نقطة</h3>
+        <p>مكافأة إضافية</p>
+        <div class="mini-timer timer" data-seconds="26345">07 : 19 : 05</div>
+        <button class="card-btn">احصل على العرض</button>
+      </article>
+
+      <article class="bonus-card blue reveal delay-3">
+        <div class="card-gift">💎</div>
+        <h3>150% + 180 نقطة</h3>
+        <p>عرض محدود</p>
+        <div class="mini-timer timer" data-seconds="26345">07 : 19 : 05</div>
+        <button class="card-btn">احصل على العرض</button>
+      </article>
+    </section>
+
+    <h2 class="section-title" id="guide">طريقة التسجيل وإدخال الكود</h2>
+    <section class="guide reveal">
+      <div class="guide-image-box">
+        <!-- ضع الصورة التي أرسلتها في نفس مجلد ملف index.html وسمّها: registration-guide.jpg -->
+        <img src="registration-guide.jpg" alt="صورة توضح مكان إدخال كود العرض أثناء التسجيل" />
+        <div class="image-fallback">
+          <div>
+            <strong>ضع صورة طريقة التسجيل هنا</strong><br />
+            اسم الملف المطلوب: registration-guide.jpg
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-content">
+        <span class="badge">📌 مهم جداً</span>
+        <h2>أدخل كود العرض في خانة الكود</h2>
+
+        <div class="copy-box">
+          <span>انسخ الكود:</span>
+          <strong class="promo-code" id="promoCode">5000TN</strong>
+          <button class="btn btn-primary" id="copyCodeBtn">نسخ الكود</button>
+        </div>
+
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div><b>اضغط على زر التسجيل</b><span>ابدأ من زر “سجّل الآن بالكود”.</span></div></div>
+          <div class="step"><div class="num">2</div><div><b>املأ معلوماتك</b><span>أدخل رقم الهاتف والبريد الإلكتروني وكلمة المرور.</span></div></div>
+          <div class="step"><div class="num">3</div><div><b>اكتب الكود 5000TN</b><span>ضع الكود في خانة الرمز الترويجي كما هو ظاهر في الصورة.</span></div></div>
+          <div class="step"><div class="num">4</div><div><b>أكمل التسجيل</b><span>بعدها اضغط على زر التسجيل داخل الصفحة الرسمية.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-panel reveal">
+      <div>
+        <h2>احتجت مساعدة؟</h2>
+        <p>تواصل معنا أو اشترك في قناة التيلغرام للحصول على آخر التحديثات والعروض.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="https://www.facebook.com/profile.php?id=61577421413959">تواصل معنا</a>
+        <a class="btn btn-telegram" href="https://t.me/Play_2_Win_official" target="_blank" rel="noopener">اشترك في التيلغرام</a>
+        <button class="btn btn-dark" id="shareBtn">شارك العرض</button>
+      </div>
+    </section>
+
+    <h2 class="section-title">أسئلة سريعة</h2>
+    <section class="faq">
+      <details open>
+        <summary>كيف أستفيد من العرض؟</summary>
+        <p>اضغط على زر التسجيل، أكمل معلوماتك، ثم اكتب كود العرض 5000TN في خانة الرمز الترويجي.</p>
+      </details>
+      <details>
+        <summary>أين أكتب الكود؟</summary>
+        <p>اكتب الكود في خانة الرمز الترويجي أثناء التسجيل، والصورة أعلاه توضح المكان.</p>
+      </details>
+      <details>
+        <summary>كيف أنضم لقناة التيلغرام؟</summary>
+        <p>اضغط على زر “اشترك في التيلغرام” وسيتم تحويلك مباشرة إلى القناة.</p>
+      </details>
+    </section>
+  </main>
+
+  <nav class="mobile-sticky">
+    <a href="https://one-vv7750.com/?open=register&p=hmyw">سجّل الآن</a>
+    <a href="https://t.me/Play_2_Win_official" target="_blank" rel="noopener">تيلغرام</a>
+    <a href="https://www.facebook.com/profile.php?id=61577421413959" target="_blank" rel="noopener">تواصل</a>
+  </nav>
+
+  <script>
+    const REGISTER_URL = 'https://one-vv7750.com/?open=register&p=hmyw';
+    const TELEGRAM_URL = 'https://t.me/Play_2_Win_official';
+    const PROMO_CODE = '5000TN';
+
+    document.querySelectorAll('.card-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        window.location.href = REGISTER_URL;
+      });
+    });
+
+    function twoDigits(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function formatMiniTimer(totalSeconds) {
+      const h = twoDigits(Math.floor(totalSeconds / 3600));
+      const m = twoDigits(Math.floor((totalSeconds % 3600) / 60));
+      const s = twoDigits(totalSeconds % 60);
+      return `${h} : ${m} : ${s}`;
+    }
+
+    const miniTimers = document.querySelectorAll('.timer');
+    setInterval(() => {
+      miniTimers.forEach(timer => {
+        let seconds = Number(timer.dataset.seconds || 0);
+        seconds = seconds <= 0 ? 26345 : seconds - 1;
+        timer.dataset.seconds = seconds;
+        timer.textContent = formatMiniTimer(seconds);
+      });
+    }, 1000);
+
+    const COUNTDOWN_KEY = 'bonus_offer_end_time_v1';
+    const DEFAULT_DURATION = (7 * 60 * 60 + 19 * 60 + 5) * 1000;
+
+    function getOfferEndTime() {
+      const saved = Number(localStorage.getItem(COUNTDOWN_KEY));
+      const now = Date.now();
+      if (saved && saved > now) return saved;
+      const newEnd = now + DEFAULT_DURATION;
+      localStorage.setItem(COUNTDOWN_KEY, String(newEnd));
+      return newEnd;
+    }
+
+    let offerEndTime = getOfferEndTime();
+
+    function updateMainCountdown() {
+      const now = Date.now();
+      let diff = Math.max(0, offerEndTime - now);
+
+      if (diff <= 0) {
+        offerEndTime = Date.now() + DEFAULT_DURATION;
+        localStorage.setItem(COUNTDOWN_KEY, String(offerEndTime));
+        diff = DEFAULT_DURATION;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById('days').textContent = twoDigits(days);
+      document.getElementById('hours').textContent = twoDigits(hours);
+      document.getElementById('minutes').textContent = twoDigits(minutes);
+      document.getElementById('seconds').textContent = twoDigits(seconds);
+    }
+
+    updateMainCountdown();
+    setInterval(updateMainCountdown, 1000);
+
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+    copyCodeBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(PROMO_CODE);
+        copyCodeBtn.textContent = 'تم نسخ الكود ✓';
+        setTimeout(() => copyCodeBtn.textContent = 'نسخ الكود', 1800);
+      } catch (error) {
+        alert('الكود هو: ' + PROMO_CODE);
+      }
+    });
+
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'مكافآت ترحيبية',
+        text: `سجّل الآن واستعمل كود العرض ${PROMO_CODE}`,
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        shareBtn.textContent = 'تم نسخ الرابط ✓';
+        setTimeout(() => shareBtn.textContent = 'شارك العرض', 1800);
+      }
+    });
+  </script>
+</body>
+</html>
